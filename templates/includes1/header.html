@@ -1,0 +1,153 @@
+{% load static %}
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<header>
+    <div class="header-area">
+        <div class="main-header">
+
+            <!-- WHITE NAVBAR -->
+            <div class="header-mid gray-bg" style="padding:8px 0; background:white; position:relative;">
+                <div class="container" style="max-width:1200px; margin:0 auto; position:relative;">
+                    <div class="row align-items-center">
+
+                        <!-- LOGO + Social Icons -->
+                        <div class="col-md-4 col-lg-4 col-xl-4 d-none d-md-flex" style="align-items:center; gap:10px; z-index:10;">
+                            
+                            <!-- Logo -->
+                            <div class="logo" style="padding:3px 0;">
+                                <a href="{% url 'home' %}">
+                                    <img src="{% static 'assets/img/logo/logo.png' %}" 
+                                         alt="In & Out News Logo"
+                                         style="height:50px; width:auto !important;">
+                                </a>
+                            </div>
+
+                            <!-- Social Icons -->
+                            <div class="social-icons" style="display:flex; gap:10px; align-items:center; font-size:20px;">
+                                <a href="https://youtube.com" target="_blank" style="color:black;"><i class="fa fa-youtube-play"></i></a>
+                                <a href="https://facebook.com" target="_blank" style="color:black;"><i class="fa fa-facebook"></i></a>
+                                <a href="https://twitter.com" target="_blank" style="color:black;"><i class="fa fa-twitter"></i></a>
+                                <a href="https://instagram.com" target="_blank" style="color:black;"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Center Title -->
+                        <div style="position:absolute; width:100%; text-align:center; left:0; top:50%; transform:translateY(-50%); z-index:1;">
+                            <div style="font-size:32px; font-weight:bold; line-height:1;">
+                                <span style="color:#B50000;">IN </span>
+                                <span style="color:black;">&</span>
+                                <span style="color:#B50000;"> OUT NEWS</span>
+                            </div>
+                            <div style="font-size:14px; font-weight:bold; color:black;">
+                                Journalism of Courage
+                            </div>
+                        </div>
+
+                        <!-- Live Time -->
+                        <div id="real-time" style="position:absolute; top:10px; right:10px; font-size:14px; font-weight:bold; color:black; text-align:right; z-index:10;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- RED NAVBAR -->
+            <div class="header-bottom header-sticky" style="background:#B50000; padding:6px 0;">
+                <div class="container" style="max-width:1200px; margin:0 auto;">
+                    <div class="row align-items-center">
+
+                        <div class="col-xl-8 col-lg-8 col-md-12 header-flex">
+
+                            <!-- Sticky Logo -->
+                            <div class="sticky-logo">
+                                <a href="{% url 'home' %}">
+                                    <img src="{% static 'assets/img/logo/logo.png' %}" 
+                                         alt="Logo"
+                                         style="height:45px; width:auto !important;">
+                                </a>
+                            </div>
+
+                            <!-- Main Menu -->
+                            <div class="main-menu d-none d-md-block">
+                                <nav>
+                                    <ul id="navigation" style="font-weight:bold; font-size:16px;">
+                                        <li><a href="{% url 'home' %}" style="color:white;">Home</a></li>
+                                        <li><a href="{% url 'aboutus' %}" style="color:white;">About</a></li>
+                                        <li>
+                                            <a href="#" style="color:white;">Categories</a>
+                                            <ul class="submenu">
+                                                {% if cat %}
+                                                    {% for c in cat %}
+                                                        <li>
+                                                            <a href="{% url 'category_detail' c.id %}">
+                                                                {{ c.catname }}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <li><a href="#">No Categories</a></li>
+                                                {% endif %}
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'contactus' %}" style="color:white;">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <!-- Right Side -->
+                        <div class="col-xl-4 col-lg-4 col-md-4">
+                            <div class="header-right f-right d-none d-lg-block">
+                                <div style="display:inline-block; margin-right:6px;">
+                                    <a href="{% url 'search_news' %}">
+                                        <i class="fa fa-search" style="color:white;"></i>
+                                    </a>
+                                </div>
+                                <div style="display:inline-block;">
+                                    <a href="{% url 'login' %}" 
+                                       style="background:white; color:#B50000; padding:3px 8px; border-radius:5px; font-weight:bold;">
+                                       Admin
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-md-none"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<style>
+.social-icons a:hover i {
+    color: #B50000;
+    transition: 0.3s;
+}
+</style>
+
+<script>
+function updateTime() {
+    const now = new Date();
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const day = days[now.getDay()];
+    const date = now.getDate().toString().padStart(2,'0') + '/' +
+                 (now.getMonth()+1).toString().padStart(2,'0') + '/' +
+                 now.getFullYear();
+    const time = now.getHours().toString().padStart(2,'0') + ':' +
+                 now.getMinutes().toString().padStart(2,'0') + ':' +
+                 now.getSeconds().toString().padStart(2,'0');
+
+    const el = document.getElementById('real-time');
+    if(el) el.innerText = day + ', ' + date + ' ' + time;
+}
+setInterval(updateTime, 1000);
+updateTime();
+</script>

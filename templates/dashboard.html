@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+
+        <!-- Category Card -->
+        <div class="col-lg-3 col-md-6">
+            <div class="card info-card category-card">
+                <div class="card-body text-center">
+                    <h5>Total Categories</h5>
+                    <h3>{{ category_count|default:0 }}</h3>
+                    <a href="{% url 'manage_category' %}" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subcategory Card -->
+        <div class="col-lg-3 col-md-6">
+            <div class="card info-card subcategory-card">
+                <div class="card-body text-center">
+                    <h5>Total Subcategories</h5>
+                    <h3>{{ subcategory_count|default:0 }}</h3>
+                    <a href="{% url 'manage_subcategory' %}" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Card -->
+        <div class="col-lg-3 col-md-6">
+            <div class="card info-card news-card">
+                <div class="card-body text-center">
+                    <h5>Total News</h5>
+                    <h3>{{ news_count|default:0 }}</h3>
+                    <a href="{% url 'manage_posts' %}" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subadmin Card -->
+        <div class="col-lg-3 col-md-6">
+            <div class="card info-card subadmin-card">
+                <div class="card-body text-center">
+                    <h5>Total Sub-Admins</h5>
+                    <h3>{{ subadmin_count|default:0 }}</h3>
+                    <a href="{% url 'manage_subadmin' %}" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chart Section -->
+    <div class="row mt-4">
+        <div class="col-lg-6 mx-auto">
+            <div class="card chart-card">
+                <div class="card-body">
+                    <h5 class="text-center">Dashboard Overview</h5>
+                    <canvas id="dashboardChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('dashboardChart');
+    if(ctx){
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Category', 'Subcategory', 'News', 'Sub-Admin'],
+                datasets: [{
+                    data: [
+                        {{ category_count|default:0 }},
+                        {{ subcategory_count|default:0 }},
+                        {{ news_count|default:0 }},
+                        {{ subadmin_count|default:0 }}
+                    ],
+                    backgroundColor: ['#ff4d4d','#4da6ff','#ffcc33','#33cc99']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    }
+});
+</script>
+
+<style>
+/* Card Styling */
+.info-card {
+    border-radius: 10px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+.info-card h5 { font-size: 1.1rem; margin-bottom: 10px; }
+.info-card h3 { font-size: 2rem; margin-bottom: 15px; font-weight: 700; }
+
+/* Card colors */
+.category-card { background-color: #ff4d4d; }
+.subcategory-card { background-color: #4da6ff; }
+.news-card { background-color: #ffcc33; color:#000; }
+.subadmin-card { background-color: #33cc99; }
+
+/* Hover effect */
+.info-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+/* View Details Button */
+.view-details-btn {
+    color: #fff; font-weight: 600; text-decoration: underline;
+    transition: color 0.3s;
+}
+.view-details-btn:hover { color: #000; }
+
+/* Chart Card */
+.chart-card { border-radius: 10px; padding: 20px; }
+
+/* Responsive */
+@media(max-width: 768px){
+    .info-card h3 { font-size: 1.5rem; }
+    .info-card h5 { font-size: 1rem; }
+}
+</style>
+
+{% endblock %}

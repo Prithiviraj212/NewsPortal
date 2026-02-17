@@ -1,0 +1,35 @@
+{% load static %}
+
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'assets/img/logo.png' %}" 
+                             alt="In and Out News"
+                             style="height:60px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="#">Tamil</a></li>
+                        <li><a href="#">English</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Cinema</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>        
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

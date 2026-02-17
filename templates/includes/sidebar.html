@@ -1,0 +1,139 @@
+{% if user.user_type == '1' %}
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link " href="{% url 'dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Category -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i>
+          <span>Category</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'add_category' %}">
+              <i class="bi bi-circle"></i><span>Add Category</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'manage_category' %}">
+              <i class="bi bi-circle"></i><span>Manage Category</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Subcategory -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i>
+          <span>Subcategory</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'add_subcategory' %}">
+              <i class="bi bi-circle"></i><span>Add Subcategory</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'manage_subcategory' %}">
+              <i class="bi bi-circle"></i><span>Manage Subcategory</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Posts -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-files"></i>
+          <span>Posts (News)</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'add_post' %}">
+              <i class="bi bi-circle"></i><span>Add News</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'manage_posts' %}">
+              <i class="bi bi-circle"></i><span>Manage News</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Comments -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-chat"></i>
+          <span>Comments</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'all_comments' %}">
+              <i class="bi bi-circle"></i><span>All Comments</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'approved_comments' %}">
+              <i class="bi bi-circle"></i><span>Approved Comments</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'unapproved_comments' %}">
+              <i class="bi bi-circle"></i><span>Unapproved Comments</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Website Settings -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'website_update' %}">
+          <i class="bi bi-gear"></i>
+          <span>Website Setting</span>
+        </a>
+      </li>
+
+    </ul>
+
+</aside>
+
+{% else %}
+
+<!-- Subadmin View (Same without dashboard restriction changes) -->
+
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{% url 'dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Same structure below -->
+      <!-- (Category, Subcategory, Posts, Comments, Website Settings) -->
+
+      <!-- You can restrict features later if needed -->
+
+    </ul>
+
+</aside>
+
+{% endif %}
