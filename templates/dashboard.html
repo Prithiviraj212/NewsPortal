@@ -1,17 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="pagetitle">
-    <h1>Dashboard</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-    </nav>
+<!-- Dashboard Page Title -->
+<div class="pagetitle d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <!-- Home link goes to actual home page -->
+                <li class="breadcrumb-item"><a href="{% url 'home' %}" class="breadcrumb-link">Home</a></li>
+                <li class="breadcrumb-item active breadcrumb-link">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- Home Button Removed -->
 </div>
 
 <section class="section dashboard">
+
+    <!-- Top Dashboard Header -->
+    <div class="row mb-4 text-center">
+        <div class="col-12">
+            <h2 class="main-title">
+                <span class="red-text">IN</span> 
+                <span class="amp">&amp;</span> 
+                <span class="red-text">OUT NEWS</span>
+            </h2>
+            <p class="subtitle">Journalism of Courage</p>
+        </div>
+    </div>
+
     <div class="row">
 
         <!-- Category Card -->
@@ -104,6 +122,35 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <style>
+/* Breadcrumb text bold and colored */
+.breadcrumb-link {
+    font-weight: 700; /* Bold */
+    color: #cc0000;   /* Dark red */
+}
+.breadcrumb-link:hover {
+    color: #990000; /* Darker red on hover */
+    text-decoration: underline;
+}
+
+/* Top Titles */
+.main-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.main-title .red-text {
+    color: #cc0000; /* Darker red */
+}
+.main-title .amp {
+    color: #000000; /* Black & symbol */
+}
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 20px;
+}
+
 /* Card Styling */
 .info-card {
     border-radius: 10px;
@@ -139,6 +186,8 @@ document.addEventListener("DOMContentLoaded", function() {
 @media(max-width: 768px){
     .info-card h3 { font-size: 1.5rem; }
     .info-card h5 { font-size: 1rem; }
+    .main-title { font-size: 1.5rem; }
+    .subtitle { font-size: 1rem; }
 }
 </style>
 

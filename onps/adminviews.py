@@ -30,7 +30,7 @@ def ADD_SUBADMIN(request):
            last_name=last_name,
            username=username,
            email=email,
-           user_type=2,  # subadmin type
+           user_type=2,
            profile_pic=pic,
         )
         user.set_password(password)
@@ -97,6 +97,7 @@ def SUBADMIN_PROFILE_UPDATE(request):
     user1 = get_object_or_404(CustomUser, id=userid, user_type=2)
     return render(request, 'admin/subadmin-profile.html', {"user1": user1})
 
+
 # =====================================
 # ========== CATEGORY MANAGEMENT =====
 # =====================================
@@ -149,6 +150,7 @@ def UPDATE_CATEGORY_DETAILS(request):
         messages.success(request,"Category updated Successfully!")
         return redirect('manage_category')
     return redirect('manage_category')
+
 
 # =====================================
 # ========== SUBCATEGORY MANAGEMENT ===
@@ -310,7 +312,7 @@ def WEBSITE_UPDATE(request):
 
 @login_required(login_url='/')
 def ALL_COMMENTS(request):
-    all_comm = Comments.objects.all()
+    all_comm = Comments.objects.all().order_by('-posted_date')
     paginator = Paginator(all_comm, 10)
     page_number = request.GET.get('page')
     try:
@@ -324,7 +326,7 @@ def ALL_COMMENTS(request):
 
 @login_required(login_url='/')
 def APPROVED_COMMENTS(request):
-    approved_comm = Comments.objects.filter(status='Approved')
+    approved_comm = Comments.objects.filter(status='Approved').order_by('-posted_date')
     paginator = Paginator(approved_comm, 10)
     page_number = request.GET.get('page')
     try:
@@ -338,7 +340,7 @@ def APPROVED_COMMENTS(request):
 
 @login_required(login_url='/')
 def UNAPPROVED_COMMENTS(request):
-    unapproved_comm = Comments.objects.filter(status='Unapproved')
+    unapproved_comm = Comments.objects.filter(status='Unapproved').order_by('-posted_date')
     paginator = Paginator(unapproved_comm, 10)
     page_number = request.GET.get('page')
     try:

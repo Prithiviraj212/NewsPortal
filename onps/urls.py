@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from . import views, adminviews
 
 urlpatterns = [
-
     # ================== HOME ==================
     path('', views.INDEX, name='home'),
     path('aboutus/', views.ABOUTUS, name='aboutus'),
@@ -45,16 +44,21 @@ urlpatterns = [
     path('admin/add-category/', adminviews.ADD_CATEGORY, name='add_category'),
     path('admin/manage-category/', adminviews.MANAGE_CATEGORY, name='manage_category'),
     path('admin/delete-category/<int:id>/', adminviews.DELETE_CATEGORY, name='delete_category'),
+    path('admin/update-category/<int:id>/', adminviews.UPDATE_CATEGORY, name='update_category'),
 
     # ================== SUBCATEGORY MANAGEMENT ==================
     path('admin/add-subcategory/', adminviews.ADD_SUBCATEGORY, name='add_subcategory'),
     path('admin/manage-subcategory/', adminviews.MANAGE_SUBCATEGORY, name='manage_subcategory'),
     path('admin/delete-subcategory/<int:id>/', adminviews.DELETE_SUBCATEGORY, name='delete_subcategory'),
+    path('admin/update-subcategory/<int:id>/', adminviews.UPDATE_SUBCATEGORY, name='update_subcategory'),
 
     # ================== POSTS ==================
     path('admin/add-post/', adminviews.ADD_POST, name='add_post'),
     path('admin/manage-posts/', adminviews.MANAGE_POSTS, name='manage_posts'),
     path('admin/delete-post/<int:id>/', adminviews.DELETE_POSTS, name='delete_post'),
+    path('admin/views-posts/<int:id>/', adminviews.VIEWS_POSTS, name='views_posts'),  # ✅ ADDED THIS
+
+    path('admin/update-post/', adminviews.UPDATE_POST, name='update_post'),
 
     # ================== COMMENTS MANAGEMENT ==================
     path('admin/all-comments/', adminviews.ALL_COMMENTS, name='all_comments'),
@@ -71,6 +75,5 @@ urlpatterns = [
     path('django-admin/', admin.site.urls),
 ]
 
-# ================== MEDIA FILE SETTINGS ==================
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
