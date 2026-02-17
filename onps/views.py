@@ -6,10 +6,9 @@ from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from newsapp.models import CustomUser, News, Category, Page, Comments, Subcategory
+from newsapp.models import CustomUser, News, Category, Page, Comments, Subcategory, Contact
 
 User = get_user_model()
-
 
 # ------------------ Base Pages ------------------
 def BASE(request):
@@ -46,6 +45,29 @@ def ABOUTUS(request):
 def CONTACTUS(request):
     first_page = Page.objects.first()
     return render(request, 'contactus.html', {'page': first_page})
+
+
+# ------------------ Contact Form Submit ------------------
+def contact_submit(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        if name and email and message:
+            Contact.objects.create(
+                name=name,
+                email=email,
+                message=message,
+                posted_date=timezone.now()
+            )
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('contactus')
+        else:
+            messages.error(request, "Please fill all fields!")
+            return redirect('contactus')
+
+    return redirect('contactus')
 
 
 # ------------------ Category Page ------------------

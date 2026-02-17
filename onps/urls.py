@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.INDEX, name='home'),
     path('aboutus/', views.ABOUTUS, name='aboutus'),
     path('contactus/', views.CONTACTUS, name='contactus'),
+    path('contact-submit/', views.contact_submit, name='contact_submit'),  # ✅ Contact Form Submit
 
     # ================== CATEGORY ==================
     path('category/<int:id>/', views.category_detail, name='category_detail'),
@@ -56,8 +57,7 @@ urlpatterns = [
     path('admin/add-post/', adminviews.ADD_POST, name='add_post'),
     path('admin/manage-posts/', adminviews.MANAGE_POSTS, name='manage_posts'),
     path('admin/delete-post/<int:id>/', adminviews.DELETE_POSTS, name='delete_post'),
-    path('admin/views-posts/<int:id>/', adminviews.VIEWS_POSTS, name='views_posts'),  # ✅ ADDED THIS
-
+    path('admin/views-posts/<int:id>/', adminviews.VIEWS_POSTS, name='views_posts'),
     path('admin/update-post/', adminviews.UPDATE_POST, name='update_post'),
 
     # ================== COMMENTS MANAGEMENT ==================

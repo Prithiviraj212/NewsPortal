@@ -1,16 +1,39 @@
 {% extends 'base1.html' %}
-{% block content %}
 {% load static %}
- <div class="about-details section-padding30">
-        <div class="container">
-            <div class="row">
-                <div class="offset-xl-1 col-lg-8">
-                    <div class="about-details-cap mb-50">
-                        <h4>About Us</h4>
-                        <p>{{ page.aboutus }} </p>
-                       
-                    
-                </div>
-            </div>
+{% block content %}
+
+<div class="container my-5" style="max-width:800px;">
+
+    <!-- About Us Heading -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 style="color:#8B0000; font-weight:bold; font-size:32px;">About Us</h2>
         </div>
-    </div> {% endblock %}
+    </div>
+
+    <!-- About Us Content from Dashboard -->
+    <div style="line-height:1.8; color:black; font-size:16px;">
+        {% for page in pages %}
+            {{ page.aboutus|safe }}
+        {% empty %}
+            <p>
+                IN & OUT CINEMA is a well-known cinema equipment rental company based in Chennai, recognized for providing high-quality cameras, lighting, and other filmmaking tools to professionals across the city. With years of experience in supporting filmmakers and media creators, we recently expanded our services by launching a full-fledged news portal to keep our audience informed 24/7.
+            </p>
+
+            <p>
+                Our news portal delivers a wide range of content, including cinema updates, entertainment news, national events, and international developments. We aim to provide accurate, engaging, and easy-to-read news for all readers, catering to cinema enthusiasts as well as general audiences who want to stay informed on the latest happenings.
+            </p>
+
+            <p>
+                As a newly started platform, we are committed to building trust and delivering consistent, high-quality news updates. Our goal is to connect readers with timely information while continuing to support the film and media community through our original cinema services.
+            </p>
+
+            <p>
+                Thank you for visiting our portal. We look forward to keeping you informed, entertained, and connected with all the latest news and cinema updates.
+            </p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

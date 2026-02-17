@@ -1,40 +1,158 @@
 {% extends 'base1.html' %}
-{% block content %}
 {% load static %}
-<section class="contact-section">
-    <div class="container">
 
+{% block content %}
 
+<section class="contact-section" style="padding:60px 0; background-color:#f9f9f9;">
+    <div class="container" style="max-width:900px;">
 
-        <div class="row">
-            <div class="col-12">
-                <h2 class="contact-title">Get in Touch</h2>
-            </div>
-        
-            <div class="col-lg-3 offset-lg-1">
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-home"></i></span>
-                    <div class="media-body">
-                        <h3>Address</h3>
-                        <p>{{ page.address }}</p>
-                       
-                    </div>
-                </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                    <div class="media-body">
-                        <h3>{{ page.mobilenumber }}</h3>
-                        <p>Mon to Fri 9am to 6pm</p>
-                    </div>
-                </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-email"></i></span>
-                    <div class="media-body">
-                        <h3>{{ page.email }}</h3>
-                        <p>Send us your query anytime!</p>
-                    </div>
-                </div>
+        <!-- Contact Details -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 style="color:black; font-weight:bold; font-size:32px;">Contact Details</h2>
             </div>
         </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-6">
+                {% for page in pages %}
+                <div style="margin-bottom:30px;">
+                    <h4 style="color:#8B0000; font-weight:bold;">Address</h4>
+                    <p style="color:black;">{{ page.address }}</p>
+                </div>
+
+                <div style="margin-bottom:30px;">
+                    <h4 style="color:#8B0000; font-weight:bold;">Phone</h4>
+                    <p style="color:black;">{{ page.mobilenumber }}</p>
+                </div>
+
+                <div style="margin-bottom:30px;">
+                    <h4 style="color:#8B0000; font-weight:bold;">Email</h4>
+                    <p style="color:black;">{{ page.email }}</p>
+                </div>
+                {% empty %}
+                <div style="margin-bottom:30px;">
+                    <h4 style="color:#8B0000; font-weight:bold;">Address</h4>
+                    <p style="color:black;">Flat No. 12, Near Kodambakkam Railway Station, Kodambakkam, Chennai - 600024</p>
+                </div>
+
+                <div style="margin-bottom:30px;">
+                    <h4 style="color:#8B0000; font-weight:bold;">Phone</h4>
+                    <p style="color:black;">+91 9698570841</p>
+                </div>
+
+                <div style="margin-bottom:30px;">
+                    <h4 style="color:#8B0000; font-weight:bold;">Email</h4>
+                    <p style="color:black;">inandoutcinema7@gmail.com</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Social & Website Links -->
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h3 style="color:#8B0000; font-weight:bold; margin-bottom:20px;"> Social Media Links</h3>
+
+                {% for page in pages %}
+                <p style="margin-bottom:10px;">
+                    <strong>YouTube:</strong> 
+                    <a href="{{ page.youtube }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.youtube }}
+                    </a>
+                </p>
+
+                <p style="margin-bottom:10px;">
+                    <strong>Website:</strong> 
+                    <a href="{{ page.website }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.website }}
+                    </a>
+                </p>
+
+                <p style="margin-bottom:10px;">
+                    <strong>Facebook:</strong> 
+                    <a href="{{ page.facebook }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.facebook }}
+                    </a>
+                </p>
+
+                <p style="margin-bottom:10px;">
+                    <strong>Twitter:</strong> 
+                    <a href="{{ page.twitter }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.twitter }}
+                    </a>
+                </p>
+
+                <p style="margin-bottom:10px;">
+                    <strong>Instagram:</strong> 
+                    <a href="{{ page.instagram }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.instagram }}
+                    </a>
+                </p>
+
+                <p style="margin-bottom:10px;">
+                    <strong>Google+:</strong> 
+                    <a href="{{ page.googleplus }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.googleplus }}
+                    </a>
+                </p>
+
+                <p style="margin-bottom:10px;">
+                    <strong>Pinterest:</strong> 
+                    <a href="{{ page.pinterest }}" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        {{ page.pinterest }}
+                    </a>
+                </p>
+                {% empty %}
+                <!-- Default links if nothing in DB -->
+                <p style="margin-bottom:10px;">
+                    <strong>YouTube:</strong> 
+                    <a href="https://www.youtube.com/channel/UCw27QsX2tkSTvH4Y1C_cDvQ?sub_confirmation=1" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        https://www.youtube.com/channel/UCw27QsX2tkSTvH4Y1C_cDvQ
+                    </a>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <strong>Website:</strong> 
+                    <a href="https://inandoutcinema.com/home" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        inandoutcinema.com
+                    </a>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <strong>Facebook:</strong> 
+                    <a href="https://www.facebook.com/inandoutcinema" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        facebook.com/inandoutcinema
+                    </a>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <strong>Twitter:</strong> 
+                    <a href="https://twitter.com/inandoutcinema" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        twitter.com/inandoutcinema
+                    </a>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <strong>Instagram:</strong> 
+                    <a href="https://www.instagram.com/inandoutcinema" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        instagram.com/inandoutcinema
+                    </a>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <strong>Google+:</strong> 
+                    <a href="https://plus.google.com/u/0/InandoutCinema" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        plus.google.com/u/0/InandoutCinema
+                    </a>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <strong>Pinterest:</strong> 
+                    <a href="https://in.pinterest.com/inandoutcinema" target="_blank" style="color:#8B0000; text-decoration:none;">
+                        in.pinterest.com/inandoutcinema
+                    </a>
+                </p>
+                {% endfor %}
+
+            </div>
+        </div>
+
     </div>
-    </section> {% endblock %}
+</section>
+
+{% endblock %}
