@@ -71,31 +71,22 @@ def VIEW_SUBADMIN(request, id):
 
 
 @login_required(login_url='/')
-def SUBADMIN_PROFILE_UPDATE(request):
+def SUBADMIN_PROFILE_UPDATE(request, id):
+    """
+    Updated: Now id comes from URL instead of GET/POST hidden field.
+    """
+    user = get_object_or_404(CustomUser, id=id, user_type=2)
     if request.method == "POST":
         profile_pic = request.FILES.get('profile_pic')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        userid = request.POST.get('userid')
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        if profile_pic:
+            user.profile_pic = profile_pic
+        user.save()
+        messages.success(request, "Profile updated successfully")
+        return redirect('view_subadmin', id=user.id)
 
-        try:
-            user = CustomUser.objects.get(id=userid, user_type=2)
-            user.first_name = first_name
-            user.last_name = last_name
-            if profile_pic:
-                user.profile_pic = profile_pic
-            user.save()
-            messages.success(request, "Profile updated successfully")
-            return redirect('view_subadmin', id=user.id)
-        except CustomUser.DoesNotExist:
-            messages.error(request, "User not found.")
-        except Exception as e:
-            print(e)
-            messages.error(request, "Profile update failed.")
-
-    userid = request.GET.get('id')
-    user1 = get_object_or_404(CustomUser, id=userid, user_type=2)
-    return render(request, 'admin/subadmin-profile.html', {"user1": user1})
+    return render(request, 'admin/subadmin-profile.html', {"user1": user})
 
 
 # =====================================
@@ -210,9 +201,15 @@ def UPDATE_SUBCATEGORY_DETAILS(request):
 
 @login_required(login_url='/')
 def get_subcat(request):
+    """
+    AJAX call to fetch all subcategories for a selected category.
+    Returns JSON containing <option> tags for the Subcategory dropdown.
+    """
     c_id = request.GET.get('c_id')
-    subcat_list = Subcategory.objects.filter(cat_id=c_id)
-    html = ''.join([f'<option value="{s.id}">{s.subcatname}</option>' for s in subcat_list])
+    subcat_list = Subcategory.objects.filter(cat_id=c_id).order_by('subcatname')
+    html = '<option value="">Select Subcategory</option>'
+    for s in subcat_list:
+        html += f'<option value="{s.id}">{s.subcatname}</option>'
     return JsonResponse({'subcat_options': html})
 
 
