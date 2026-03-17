@@ -1,1 +1,1 @@
-web: gunicorn newsportal.wsgi:application
+web: gunicorn onps.wsgi:application
