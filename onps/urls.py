@@ -27,8 +27,6 @@ urlpatterns = [
     # ================== LOGIN / LOGOUT ==================
     path('login/', views.LOGIN, name='login'),
     path('do-login/', views.doLogin, name='doLogin'),
-
-    # LOGOUT (Dashboard button will call this)
     path('logout/', views.doLogout, name='logout'),
 
     # ================== DASHBOARD ==================
