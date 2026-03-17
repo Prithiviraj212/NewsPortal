@@ -13,7 +13,11 @@
             </ol>
         </nav>
     </div>
-    <!-- Home Button Removed -->
+
+    <!-- Logout Button -->
+    <div>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
 </div>
 
 <section class="section dashboard">
@@ -124,12 +128,26 @@ document.addEventListener("DOMContentLoaded", function() {
 <style>
 /* Breadcrumb text bold and colored */
 .breadcrumb-link {
-    font-weight: 700; /* Bold */
-    color: #cc0000;   /* Dark red */
+    font-weight: 700;
+    color: #cc0000;
 }
 .breadcrumb-link:hover {
-    color: #990000; /* Darker red on hover */
+    color: #990000;
     text-decoration: underline;
+}
+
+/* Logout Button */
+.logout-btn{
+    background:#cc0000;
+    color:#fff;
+    padding:8px 16px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:600;
+}
+.logout-btn:hover{
+    background:#990000;
+    color:#fff;
 }
 
 /* Top Titles */
@@ -138,12 +156,9 @@ document.addEventListener("DOMContentLoaded", function() {
     font-weight: 700;
     margin-bottom: 5px;
 }
-.main-title .red-text {
-    color: #cc0000; /* Darker red */
-}
-.main-title .amp {
-    color: #000000; /* Black & symbol */
-}
+.main-title .red-text { color: #cc0000; }
+.main-title .amp { color: #000000; }
+
 .subtitle {
     font-size: 1.2rem;
     font-weight: 500;
@@ -170,12 +185,16 @@ document.addEventListener("DOMContentLoaded", function() {
 .subadmin-card { background-color: #33cc99; }
 
 /* Hover effect */
-.info-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
 
 /* View Details Button */
 .view-details-btn {
-    color: #fff; font-weight: 600; text-decoration: underline;
-    transition: color 0.3s;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
 }
 .view-details-btn:hover { color: #000; }
 

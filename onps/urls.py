@@ -7,7 +7,7 @@ from . import views, adminviews
 urlpatterns = [
 
     # ================== HOME ==================
-    path('', views.INDEX, name='home'),
+    path('', views.HOME, name='home'),
     path('aboutus/', views.ABOUTUS, name='aboutus'),
     path('contactus/', views.CONTACTUS, name='contactus'),
     path('contact-submit/', views.contact_submit, name='contact_submit'),
@@ -27,6 +27,8 @@ urlpatterns = [
     # ================== LOGIN / LOGOUT ==================
     path('login/', views.LOGIN, name='login'),
     path('do-login/', views.doLogin, name='doLogin'),
+
+    # LOGOUT (Dashboard button will call this)
     path('logout/', views.doLogout, name='logout'),
 
     # ================== DASHBOARD ==================
@@ -79,5 +81,6 @@ urlpatterns = [
     path('django-admin/', admin.site.urls),
 ]
 
+# ================== MEDIA FILES ==================
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
